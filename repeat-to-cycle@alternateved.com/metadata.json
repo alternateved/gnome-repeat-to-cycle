@@ -1,0 +1,7 @@
+{
+  "name": "Repeat To Cycle",
+  "description": "Cycle between windows of application using dash shortcut.",
+  "uuid": "repeat-to-cycle@alternateved.com",
+  "shell-version": ["48"],
+  "url": "https://github.com/alternateved/gnome-repeat-to-cycle"
+}
