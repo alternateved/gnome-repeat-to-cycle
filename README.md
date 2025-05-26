@@ -8,11 +8,17 @@ This is how it works:
 3. Cycle to the next window if application is focused (repeated presses cycle through all windows).
 4. No action if application has focus and only one window exists.
 
-This adds window cycling to Gnome's dash shortcuts (`switch-to-application-<number>`).
+This adds app window cycling to Gnome's dash shortcuts (`switch-to-application-<number>`).
 
 ## Installation
+This extension is available on [extensions.gnome.org](https://extensions.gnome.org/extension/8222/repeat-to-cycle/). You can install from there or install manually. By installing from extensions.gnome.org you will always have the latest update.
+
+### Install manually
+The following commands will install the extension:
 ```sh
+git clone https://github.com/alternateved/gnome-repeat-to-cycle.git
+cd gnome-repeat-to-cycle
 make install
 ```
 
-After that reload Gnome session and enable extension.
+Logout and login required after manual installation.
