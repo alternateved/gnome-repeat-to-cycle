@@ -8,7 +8,7 @@ import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
 export default class RepeatToCycle extends Extension {
   #settings = null;
   #lastActivatedApp = null;
-  #lastActivatedWindow = null;
+  #cachedWindowOrder = null;
 
   _getAppWindows(app) {
     return app
@@ -38,7 +38,7 @@ export default class RepeatToCycle extends Extension {
           if (windows.length === 0) {
             app.activate();
             this.#lastActivatedApp = app;
-            this.#lastActivatedWindow = null;
+            this.#cachedWindowOrder = null;
             return;
           }
 
@@ -49,31 +49,33 @@ export default class RepeatToCycle extends Extension {
             } else {
               win.activate(global.get_current_time());
               this.#lastActivatedApp = app;
-              this.#lastActivatedWindow = win;
+              this.#cachedWindowOrder = null;
             }
             return;
           }
 
           const currentWindow = windows.find((w) => w.has_focus());
+          const shouldRefreshCache =
+            this.#lastActivatedApp !== app ||
+            !this.#cachedWindowOrder ||
+            this.#cachedWindowOrder.length !== windows.length;
+
+          if (shouldRefreshCache) {
+            this.#cachedWindowOrder = windows;
+          }
 
           let nextWindow;
-          if (this.#lastActivatedApp === app && currentWindow) {
-            const currentIndex = windows.indexOf(currentWindow);
-            const nextIndex = (currentIndex + 1) % windows.length;
-            nextWindow = windows[nextIndex];
+          if (currentWindow) {
+            const currentIndex = this.#cachedWindowOrder.indexOf(currentWindow);
+            const nextIndex =
+              (currentIndex + 1) % this.#cachedWindowOrder.length;
+            nextWindow = this.#cachedWindowOrder[nextIndex];
           } else {
             nextWindow = windows[0];
           }
 
-          if (nextWindow.has_focus()) {
-            const nextIndex =
-              (windows.indexOf(nextWindow) + 1) % windows.length;
-            nextWindow = windows[nextIndex];
-          }
-
           nextWindow.activate(global.get_current_time());
           this.#lastActivatedApp = app;
-          this.#lastActivatedWindow = nextWindow;
         };
 
         global.display.add_keybinding(
@@ -114,6 +116,6 @@ export default class RepeatToCycle extends Extension {
     this._restoreSwitchToApplication();
     this.#settings = null;
     this.#lastActivatedApp = null;
-    this.#lastActivatedWindow = null;
+    this.#cachedWindowOrder = null;
   }
 }
