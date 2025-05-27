@@ -1,6 +1,6 @@
 {
   "name": "Repeat To Cycle",
-  "description": "Cycle between windows of application using dash shortcut.",
+  "description": "Cycle between windows of application using dash shortcut.\n\nEnhances Super+number keyboard shortcuts with window cycling functionality. Press Super+number to launch apps, focus their most recent window, or cycle through multiple windows of the same application. Implements missing window cycling behavior for dash applications.\n\nGood addition to workflow for users who work with multiple windows of the same application and want faster, keyboard-driven switching.",
   "uuid": "repeat-to-cycle@alternateved.com",
   "shell-version": ["48"],
   "url": "https://github.com/alternateved/gnome-repeat-to-cycle"
