@@ -13,7 +13,7 @@ This adds app window cycling to Gnome's dash shortcuts (`switch-to-application-<
 ## Installation
 This extension is available on [extensions.gnome.org](https://extensions.gnome.org/extension/8222/repeat-to-cycle/). You can install from there or install manually. By installing from extensions.gnome.org you will always have the latest update.
 
-### Install manually
+### Manual
 The following commands will install the extension:
 ```sh
 git clone https://github.com/alternateved/gnome-repeat-to-cycle.git
