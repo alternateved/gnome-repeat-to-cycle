@@ -44,13 +44,12 @@ export default class RepeatToCycle extends Extension {
 
           if (windows.length === 1) {
             const win = windows[0];
-            if (win.has_focus()) {
-              return;
-            } else {
+            if (!win.has_focus()) {
               win.activate(global.get_current_time());
-              this.#lastActivatedApp = app;
-              this.#cachedWindowOrder = null;
             }
+
+            this.#lastActivatedApp = app;
+            this.#cachedWindowOrder = null;
             return;
           }
 
